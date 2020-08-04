@@ -1,0 +1,3 @@
+el error se da porque no se ha actualizado los cambios en el repo local,
+entonces da conflicto al detectar que hay cambios de un colaborador que
+no se han actualizado de manera local
