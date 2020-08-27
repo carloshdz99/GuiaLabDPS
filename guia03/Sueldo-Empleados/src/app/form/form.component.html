@@ -1,0 +1,66 @@
+<div class="container">
+    <h1>Calculando salario</h1>
+
+    <form #empleadoform="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group col-sm-8">
+            <label>Nombre:</label>
+            <input type="text" class="form-control" required [(ngModel)]="nombre" name="nombre" #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                <div *ngIf="name.errors.required" class="text-danger">
+                    El nombre es requerido
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-8">
+            <label>Apellido:</label>
+            <input type="text" class="form-control" required [(ngModel)]="apellido" name="apellido" #lastname="ngModel">
+            <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+                <div *ngIf="lastname.errors.required" class="text-danger">
+                    El apellido es requerido
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-8">
+            <label>Salario del empleado:</label>
+            <input type="number" class="form-control" min="0" required [(ngModel)]="salario" name="salario" #money="ngModel">
+            <div *ngIf="money.invalid && (money.dirty || money.touched)">
+                <div *ngIf="money.errors.required" class="text-danger">
+                    El salario es requerido
+                </div>
+                <div *nIf="money.errors.min" class="text-danger">
+                    No puede ser un valor negativo
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-8">
+            <button class="btn btn-primary" type="submit" [disabled]="!empleadoform.form.valid">Enviar</button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Afp</th>
+                <th>Isss</th>
+                <th>Renta</th>
+                <th>Salario Neto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dato of Empleados">
+                <td>{{dato.nombre + ' ' + dato.apellido}}</td>
+                <td>{{dato.afp}}</td>
+                <td>{{dato.isss}}</td>
+                <td>{{dato.renta}}</td>
+                <td>{{dato.salarioNeto}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
