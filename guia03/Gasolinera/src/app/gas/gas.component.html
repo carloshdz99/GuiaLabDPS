@@ -1,0 +1,73 @@
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <h3 class="text-white">Gasolinera</h3>
+        </div>
+    </nav>
+</header>
+
+<div class="container mx-auto py-4">
+    <div class="row mb-3">
+        <div class="card border-primary col m-5" style="max-width: 18rem;">
+            <div class="card-header">Gasolina Especial</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">$4.25</h5>
+            </div>
+        </div>
+        <div class="card border-primary col m-5" style="max-width: 18rem;">
+            <div class="card-header">Gasolina Regular</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">$4.05</h5>
+            </div>
+        </div>
+        <div class="card border-primary col m-5" style="max-width: 18rem;">
+            <div class="card-header">Gasolina Disiel</div>
+            <div class="card-body text-primary">
+                <h5 class="card-title">$3.96</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <form #formgaso="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <label for="tipo">Tipo de gasolina:</label>
+                <select name="gasoSeleccionada" [(ngModel)]="gasoSeleccionada" required #tipoGaso="ngModel" id="tipo" class="form-control">
+                    <option *ngFor="let tipos of tiposGasolina" [value]="tipos">{{tipos}}</option>
+                </select>
+            </div>
+            <div *ngIf="tipoGaso.valid" class="form-group col-sm-4">
+                <label for="cant">Cantidad de galones:</label>
+                <input type="number" required #cantidadpasada step="0.05" min="0.05" max="150" (input)="cantidadGalones(cantidadpasada.value)" id="cant" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <label>Total a pagar:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend" >$</span>
+                    </div>
+                    <input type="number" readonly class="form-control" [value]="totalGas" aria-describedby="inputGroupPrepend">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-dark" [disabled]="!formgaso.form.valid">Comprar</button>
+        </div>
+    </form>
+    <div class="py-3 mx-auto">
+        <table class="table">
+            <thead class="thead-dark">
+                <th scope="col">Tipo</th>
+                <th scope="col">Pago</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ventas of ventasGasolina">
+                    <th>{{ventas.tipoGasolina}}</th>
+                    <th>${{ventas.totalVenta}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
