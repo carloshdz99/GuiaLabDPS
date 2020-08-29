@@ -21,6 +21,9 @@ export class FormComponent implements OnInit {
   iss: number;
   renta: number;
 
+  //contador
+  numRegistros: number = 0;
+
   //arreglo que añadira elementos a Empleados[]
   nuevoEmpleado: any;
 
@@ -29,12 +32,12 @@ export class FormComponent implements OnInit {
   //evento de submit
   onSubmit(){
     //calculando descuentos
-    this.afp = Math.round(this.salario * 0.051);
-    this.iss = Math.round(this.salario * 0.073);
-    this.renta = Math.round(this.salario * 0.11);
+    this.afp = Math.round((this.salario * 0.051) * 100)/100;
+    this.iss = Math.round((this.salario * 0.073) * 100)/100;
+    this.renta = Math.round((this.salario * 0.11) * 100)/100;
 
     //calculando salario neto
-    this.salarioNeto = Math.round(this.salario - (this.afp + this.iss + this.renta));
+    this.salarioNeto = Math.round((this.salario - (this.afp + this.iss + this.renta)) * 100)/100;
 
     //creando arreglo de empleado nuevo
     this.nuevoEmpleado = {'nombre': this.nombre, 'apellido': this.apellido, 'isss': this.iss, 'afp': this.afp
@@ -42,6 +45,14 @@ export class FormComponent implements OnInit {
 
     //añadiendo elementos al arreglo
     this.Empleados.push(this.nuevoEmpleado);
+
+    //contando cantidad de registros
+    this.numRegistros = this.Empleados.length;
+
+    //limpiando campos
+    this.nombre ="";
+    this.apellido="";
+    this.salario=0;
   }
   
   ngOnInit(): void {
