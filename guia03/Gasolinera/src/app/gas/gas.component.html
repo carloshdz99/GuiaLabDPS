@@ -39,8 +39,11 @@
                 </select>
             </div>
             <div *ngIf="tipoGaso.valid" class="form-group col-sm-4">
-                <label for="cant">Cantidad de galones:</label>
-                <input type="number" required #cantidadpasada step="0.05" min="0.05" max="150" (input)="cantidadGalones(cantidadpasada.value)" id="cant" class="form-control">
+                <label>Cantidad de galones:</label>
+                <input type="number" required step="0.05" min="0.05" onkeypress="return event.charCode >= 48" max="150" name="cantidadpasada" [(ngModel)]="variableprueba" #cantidadpasada="ngModel" (input)="cantidadGalones(cantidadpasada.value)" class="form-control">
+                <div *ngIf="cantidadpasada.invalid">
+                    <p class="text-danger">Campo incorrecto </p>
+                </div>
             </div>
             <div class="col-sm-4">
                 <label>Total a pagar:</label>

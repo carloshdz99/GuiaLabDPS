@@ -15,6 +15,8 @@ export class GasComponent implements OnInit {
   ventasGasolina = [];
   //generando elementos del arreglo
   ventaUnitaria: any;
+  //
+  variableprueba: number = 0.05;
 
   //tipos de gasolina
   tiposGasolina: Array<string> = ["Especial", "Regular", "Disiel"];
@@ -32,17 +34,19 @@ export class GasComponent implements OnInit {
     this.ventasGasolina.push(this.ventaUnitaria);
     //resteando total gasolina a su valor inicial
     this.totalGas = 0.05;
+    //reseteando cantidad de galones
+    this.variableprueba=0;
   }
 
   //evento cuando se elige un tipo de gasolina
   cantidadGalones(value: number){
     // validando los tipos de gasolina seleccionado
     if(this.gasoSeleccionada=="Regular"){
-      this.totalGas= value*0.2025;
+      this.totalGas= Math.round((value*4.05)*100)/100;
     }else if(this.gasoSeleccionada=="Especial"){
-      this.totalGas= value*0.2125;
+      this.totalGas= Math.round((value*4.25)*100)/100;
     }else if(this.gasoSeleccionada=="Disiel"){
-      this.totalGas= value*0.198;
+      this.totalGas= Math.round((value*3.96)*100)/100;
     }
   }
 
