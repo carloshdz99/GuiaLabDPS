@@ -1,0 +1,104 @@
+<!-- margin-right property -->
+<style>
+  .btn-space {
+    margin-right: 20px;
+  }
+</style>
+
+<nav class="navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="/">
+    Primer Crud Angular
+  </a>
+</nav>
+
+<body>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mt-4">
+      <!-- mt-4 espacio en blanco vertical -->
+      <ul class="list-group">
+        <li *ngFor="let alumno of alumnoArray" class="list-group-item list-group-itemaction"
+          (click)="openForEdit(alumno)" [class.active]="alumno == selectedAlumno">
+          <span class="badge badge-primary">{{alumno.id}}</span>
+          - {{alumno.name}}
+          - {{alumno.lastname}}
+          - {{alumno.age}}
+          - {{alumno.direction}}
+          - {{alumno.telephone}}
+          - {{alumno.email}}
+        </li>
+      </ul>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <h3>{{selectedAlumno.id == 0 ? "Agregar Nuevo Alumno" : "Actualizar Alumno"}}</h3>
+          </div>
+          <div class="form-group">
+            <input type="text" required [(ngModel)]="selectedAlumno.name" placeholder="name"
+              onkeypress="return event.charCode >= 65" #namevalid="ngModel" class="form-control">
+            <p class="text-danger" *ngIf="namevalid.invalid">Campo requerido</p>
+          </div>
+          <div class="form-group">
+            <input type="text" required [(ngModel)]="selectedAlumno.lastname" placeholder="lastname"
+              onkeypress="return event.charCode >= 65" #lastnamevalid="ngModel" class="form-control">
+            <p class="text-danger" *ngIf="lastnamevalid.invalid">Campo requerido</p>
+          </div>
+          <div class="form-group">
+            <input type="number" required [(ngModel)]="selectedAlumno.age" placeholder="age"
+              onkeypress="return event.charCode >= 48" min="1" step="1" #agevalid="ngModel" class="form-control">
+            <p class="text-danger" *ngIf="agevalid.invalid">Campo requerido</p>
+          </div>
+          <div class="form-group">
+            <input type="number" required pattern="^[0-9]{8}" [(ngModel)]="selectedAlumno.telephone"
+              placeholder="telephone" #telephonevalid="ngModel" onkeypress="return event.charCode >= 48"
+              class="form-control">
+            <p class="text-danger" *ngIf="telephonevalid.invalid">El campo esta vacio o el formato es invalido debe ser
+              (########)</p>
+          </div>
+          <div class="form-group">
+            <input type="text" required [(ngModel)]="selectedAlumno.direction" #directionvalid="ngModel"
+              placeholder="direction" class="form-control">
+            <p class="text-danger" *ngIf="directionvalid.invalid">La direccion es requerida</p>
+          </div>
+          <div class="form-group">
+            <input type="email" required pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+              #emailvalid="ngModel" [(ngModel)]="selectedAlumno.email" placeholder="email" class="form-control">
+            <p class="text-danger" *ngIf="emailvalid.invalid">El campo esta vacio o el formato es invalido debe ser
+              (ejemplo@ejemplo.com)</p>
+          </div>
+          <button (click)="addOrEdit()"
+            *ngIf="namevalid.valid && lastnamevalid.valid && agevalid.valid && telephonevalid.valid && directionvalid.valid && emailvalid.valid"
+            class="btn btn-primary btn-space">
+            Guardar
+          </button>
+          <button *ngIf="selectedAlumno.id !== 0" class="btn btn-danger" (click)="delete()">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <!-- md-4 espacio en blanco vertical -->
+      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciI
+      HZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuO
+      SA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBma
+      WxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzM
+      HoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxM
+      S43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwL
+      jl6IiAvPgogIDwvc3ZnPg==">
+    </div>
+  </div>
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.21.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</body>
