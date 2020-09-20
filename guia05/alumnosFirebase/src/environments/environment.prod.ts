@@ -1,3 +1,12 @@
 export const environment = {
-  production: true
+  production: true,
+  firebase: {
+    apiKey: "AIzaSyAmQzdaJnYMGERJehx-rK4hAet0Wbza6UQ",
+    authDomain: "guia-angular-firebase.firebaseapp.com",
+    databaseURL: "https://guia-angular-firebase.firebaseio.com",
+    projectId: "guia-angular-firebase",
+    storageBucket: "guia-angular-firebase.appspot.com",
+    messagingSenderId: "252992775702",
+    appId: "1:252992775702:web:0c6bad769ded6354577737"
+  }
 };
