@@ -1,0 +1,27 @@
+<table class="table table-striped table-sm">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let alumno of alumnosLista">
+            <th>{{alumno.nombre}}</th>
+            <th>{{alumno.apellido}}</th>
+            <th>{{alumno.edad}}</th>
+            <th>{{alumno.telefono}}</th>
+            <th>{{alumno.direccion}}</th>
+            <th>{{alumno.correo}}</th>
+            <th>
+                <button class="btn btn-warning btn-sm" (click)="onEdit(alumno)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="onDelete(alumno.$key)">Eliminar</button>
+            </th>
+        </tr>
+    </tbody>
+</table>
