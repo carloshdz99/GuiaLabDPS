@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">
+            Formulario Alumnos
+        </h3>
+        <form #alumnoForm="ngForm" (ngSubmit)="onSubmit(alumnoForm)">
+            <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="alumnoService.alumnoSeleccionado.$key">
+            <div class="form-group">
+                <input type="text" required name="nombre" #nombre="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.nombre" placeholder="name"
+                    onkeypress="return event.charCode >= 65" class="form-control">
+                <p class="text-danger" *ngIf="nombre.invalid">Campo requerido</p>
+            </div>
+            <div class="form-group">
+                <input type="text" required name="apellido" #apellido="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.apellido" placeholder="lastname"
+                    onkeypress="return event.charCode >= 65" class="form-control">
+                <p class="text-danger" *ngIf="apellido.invalid">Campo requerido</p>
+            </div>
+            <div class="form-group">
+                <input type="number" required name="edad" #edad="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.edad" placeholder="age" min="1" step="1"
+                    class="form-control">
+                <p class="text-danger" *ngIf="edad.invalid">Campo requerido</p>
+            </div>
+            <div class="form-group">
+                <input type="text" required name="telefono" #telefono="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.telefono" pattern="^[0-9]{8}" placeholder="telephone"
+                    onkeypress="return event.charCode >= 48" class="form-control">
+                <p class="text-danger" *ngIf="telefono.invalid">El campo esta vacio o el formato es invalido debe ser
+                    (########)</p>
+            </div>
+            <div class="form-group">
+                <input type="text" required name="direccion" #direccion="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.direccion" placeholder="direction"
+                    class="form-control">
+                <p class="text-danger" *ngIf="direccion.invalid">La direccion es requerida</p>
+            </div>
+            <div class="form-group">
+                <input type="email" required name="correo" #correo="ngModel"
+                    [(ngModel)]="alumnoService.alumnoSeleccionado.correo"
+                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" placeholder="email"
+                    class="form-control">
+                <p class="text-danger" *ngIf="correo.invalid">El campo esta vacio o el formato es invalido debe ser
+                    (ejemplo@ejemplo.com)</p>
+            </div>
+            <div
+                *ngIf="nombre.valid && apellido.valid && edad.valid && telefono.valid && direccion.valid && correo.valid">
+                <button class="btn btn-primary" type="submit">
+                    Guardar
+                </button>
+                <button type="reset" class="btn btn-warning" (click)="resetForm(alumnoForm)">
+                    Limpiar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

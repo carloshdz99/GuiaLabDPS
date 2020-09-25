@@ -19,6 +19,11 @@ import { environment } from '../environments/environment';
 
 //llamando el servicio
 import { AuthService } from './service/auth.service';
+import { AlumnosComponent } from './components/alumnos/alumnos.component';
+import { Alumno1Component } from './components/alumnos/alumno1/alumno1.component';
+import { AlumnosListaComponent } from './components/alumnos/alumnos-lista/alumnos-lista.component';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
  
 @NgModule({
   declarations: [
@@ -27,14 +32,19 @@ import { AuthService } from './service/auth.service';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    AlumnosComponent,
+    Alumno1Component,
+    AlumnosListaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthService
