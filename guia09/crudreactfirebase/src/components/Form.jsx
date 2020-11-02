@@ -13,7 +13,7 @@ const FormDatos = ({ onChangeForm, formEmpleado, onSubmit, onCancel }) => {
                                 <FormGroup>
                                     <Label>Nombre</Label>
                                     <Input
-                                        type="text" name="nombre" placeholder="nombre..."
+                                        type="text" name="nombres" placeholder="nombre..."
                                         value={formEmpleado.nombres}
                                         onChange={onChangeForm}
                                     />
@@ -21,9 +21,9 @@ const FormDatos = ({ onChangeForm, formEmpleado, onSubmit, onCancel }) => {
                             </Col>
                             <Col>
                                 <FormGroup>
-                                    <Label>Password</Label>
+                                    <Label>Apellidos</Label>
                                     <Input
-                                        type="text" name="apellido" placeholder="apellido..."
+                                        type="text" name="apellidos" placeholder="apellido..."
                                         value={formEmpleado.apellidos}
                                         onChange={onChangeForm}
                                     />
@@ -38,8 +38,9 @@ const FormDatos = ({ onChangeForm, formEmpleado, onSubmit, onCancel }) => {
                                         onChange={onChangeForm}
 
                                     >
-                                        <option>Admin</option>
-                                        <option>Empleado</option>
+                                        <option>{formEmpleado.cargo}</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Empleado">Empleado</option>
                                     </Input>
                                 </FormGroup>
                             </Col>

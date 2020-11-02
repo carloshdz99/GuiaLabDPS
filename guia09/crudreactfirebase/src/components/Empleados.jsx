@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 
 //exportando tabla con datos 
-const TableEmpleados = () => {
+const TableEmpleados = ({ onGetEmpleado, datosEmpleados }) => {
     return (
         <div>
             <Table dark hover striped>
@@ -16,16 +16,18 @@ const TableEmpleados = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <Button color="danger">Eliminar</Button>
-                            <Button color="warning">Editar</Button>
-                        </td>
-                    </tr>
+                    {datosEmpleados.map((response) => (
+                        <tr key={response.id}>
+                            <th scope="row">{response.id}</th>
+                            <td>{response.nombres}</td>
+                            <td>{response.apellidos}</td>
+                            <td>{response.cargo}</td>
+                            <td>
+                                <Button color="danger">Eliminar</Button>
+                                <Button onClick={onGetEmpleado} color="warning">Editar</Button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </Table>
         </div>
