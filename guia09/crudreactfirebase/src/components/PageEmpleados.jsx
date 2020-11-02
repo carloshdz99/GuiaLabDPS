@@ -38,13 +38,15 @@ const PageEmpleados = () => {
         e.preventDefault();
         //insertando en la base de datos
         if (id != '') {
-
+            db.collection('empleados').doc(id).set(formEmpleado);
+            toast.info("Datos actualizados");
         } else {
             db.collection('empleados').add(formEmpleado);
             toast.success("Empleado registrado");
         }
         //reiniciando estado
         setFormEmpleado(initialForm);
+        setId('');
     }
     //limpiando campos
     const onCancel = (e) => {
@@ -52,12 +54,20 @@ const PageEmpleados = () => {
         setFormEmpleado(initialForm);
     }
     //tomando dato para editar
-    const onGetEmpleado = (e) => {
+    const onGetEmpleadoUpdate = (e) => {
         const id = e.target.parentElement.parentElement.children[0].textContent;
         setId(id);
         db.collection('empleados').doc(id).onSnapshot(response => {
             setFormEmpleado({ ...response.data() })
         })
+    }
+    //tomando para eliminar
+    const onGetEmpleadoDelete = (e) => {
+        const id = e.target.parentElement.parentElement.children[0].textContent;
+        if(window.confirm("Esta seguro de eliminar este empleado")){
+            db.collection('empleados').doc(id).delete();
+        }
+        setId('');
     }
 
     return (
@@ -71,7 +81,8 @@ const PageEmpleados = () => {
             />
             <TableEmpleados
                 datosEmpleados={datosEmpleados}
-                onGetEmpleado={onGetEmpleado}
+                onGetEmpleadoUpdate={onGetEmpleadoUpdate}
+                onGetEmpleadoDelete={onGetEmpleadoDelete}
             />
         </div>
     )

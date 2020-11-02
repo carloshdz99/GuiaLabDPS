@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 
 //exportando tabla con datos 
-const TableEmpleados = ({ onGetEmpleado, datosEmpleados }) => {
+const TableEmpleados = ({ onGetEmpleadoUpdate, datosEmpleados, onGetEmpleadoDelete }) => {
     return (
         <div>
             <Table dark hover striped>
@@ -23,8 +23,8 @@ const TableEmpleados = ({ onGetEmpleado, datosEmpleados }) => {
                             <td>{response.apellidos}</td>
                             <td>{response.cargo}</td>
                             <td>
-                                <Button color="danger">Eliminar</Button>
-                                <Button onClick={onGetEmpleado} color="warning">Editar</Button>
+                                <Button onClick={onGetEmpleadoDelete} color="danger">Eliminar</Button>{''}
+                                <Button onClick={onGetEmpleadoUpdate} color="warning">Editar</Button>{''}
                             </td>
                         </tr>
                     ))}
